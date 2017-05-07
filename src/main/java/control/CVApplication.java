@@ -34,7 +34,6 @@ import javafx.util.Duration;
 import view.WOJDMWindow;
 
 import java.io.*;
-import java.math.BigDecimal;
 
 /**
  * Created by Solyk on 28.04.2017.
@@ -61,6 +60,7 @@ public class CVApplication extends Application implements Scalable {
     private Group chatNode;
     private Group moreNode;
     private Group oldJobNode;
+    private ImageView mainCloseButton;
 
     private Group cvWindow;
     private Group whyWindow;
@@ -143,8 +143,27 @@ public class CVApplication extends Application implements Scalable {
         chatNode = new MainWindowNodes(language.getChatNodeDescription(), PROPERTIES, SCALE_DELTA).createGroup();
         chatProperties();
 
+        mainCloseButton = getCloseButton(stage);
+
         circlePathTran(BOUNDS);
 
+        Group groupPa = new Group(downloadNode, whyNode, chatNode, languageNode, moreNode, oldJobNode, cvNode, mainCloseButton);
+
+        Pane pane = new Pane();
+        pane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.0)");
+        pane.getChildren().add(groupPa);
+        pane.setScaleX(SCALE_DELTA);
+        pane.setScaleY(SCALE_DELTA);
+
+        Scene scene = new Scene(pane, 1366 * SCALE_DELTA, 738 * SCALE_DELTA);
+        scene.setFill(Color.TRANSPARENT);
+        stage.setTitle("Main");
+        stage.getIcons().add(new Image("Master-Joda.png"));
+        stage.setScene(scene);
+        stage.show();
+    }
+
+    private ImageView getCloseButton(Stage stage) {
         ImageView closeButton = new  ImageView(new Image("CloseButton.png"));
         closeButton.setLayoutX(800);
         closeButton.setLayoutY(200);
@@ -165,21 +184,7 @@ public class CVApplication extends Application implements Scalable {
             }
             stage.close();
         });
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.0)");
-        Group groupPa = new Group(downloadNode, whyNode, chatNode, languageNode, moreNode, oldJobNode, cvNode, closeButton);
-
-        pane.getChildren().add(groupPa);
-
-        pane.setScaleX(SCALE_DELTA);
-        pane.setScaleY(SCALE_DELTA);
-
-        Scene scene = new Scene(pane, 1366 * SCALE_DELTA, 738 * SCALE_DELTA);
-        scene.setFill(Color.TRANSPARENT);
-        stage.setTitle("Main");
-        stage.getIcons().add(new Image("Master-Joda.png"));
-        stage.setScene(scene);
-        stage.show();
+        return closeButton;
     }
 
     private void save() throws IOException, DocumentException {
@@ -220,69 +225,51 @@ public class CVApplication extends Application implements Scalable {
 
     private void circlePathTran(Rectangle2D bounds) {
 
-        Circle circle = getCircle(bounds, 60);
-        Circle circle1 = getCircle(bounds, 120);
-        Circle circle2 = getCircle(bounds, 180);
-        Circle circle3 = getCircle(bounds, 240);
-        Circle circle4 = getCircle(bounds, 300);
-        Circle circle5 = getCircle(bounds, 360);
+        Circle circle = getCircle(bounds, 60, 110);
+        Circle circle1 = getCircle(bounds, 120, 110);
+        Circle circle2 = getCircle(bounds, 180, 110);
+        Circle circle3 = getCircle(bounds, 240, 110);
+        Circle circle4 = getCircle(bounds, 300, 110);
+        Circle circle5 = getCircle(bounds, 360, 110);
+        Circle circle6 = getCircle(bounds, 0, 1);
+        Circle circle7 = getCircle(bounds, 45, 200);
 
-        PathTransition transition = new PathTransition();
-        transition.setNode(downloadNode);
-        transition.setDuration(Duration.seconds(15));
-        transition.setPath(circle);
-        transition.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition = getPathTransition(circle, downloadNode, Duration.seconds(15));
         transition.play();
 
-        PathTransition transition1 = new PathTransition();
-        transition1.setNode(whyNode);
-        transition1.setDuration(Duration.seconds(15));
-        transition1.setPath(circle1);
-        transition1.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition1 = getPathTransition(circle1, whyNode, Duration.seconds(15));
         transition1.play();
 
-        PathTransition transition2 = new PathTransition();
-        transition2.setNode(chatNode);
-        transition2.setDuration(Duration.seconds(15));
-        transition2.setPath(circle2);
-        transition2.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition2 = getPathTransition(circle2, chatNode, Duration.seconds(15));
         transition2.play();
 
-        PathTransition transition3 = new PathTransition();
-        transition3.setNode(languageNode);
-        transition3.setDuration(Duration.seconds(15));
-        transition3.setPath(circle3);
-        transition3.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition3 = getPathTransition(circle3, languageNode, Duration.seconds(15));
         transition3.play();
 
-        PathTransition transition4 = new PathTransition();
-        transition4.setNode(moreNode);
-        transition4.setDuration(Duration.seconds(15));
-        transition4.setPath(circle4);
-        transition4.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition4 = getPathTransition(circle4, moreNode, Duration.seconds(15));
         transition4.play();
 
-        PathTransition transition5 = new PathTransition();
-        transition5.setNode(oldJobNode);
-        transition5.setDuration(Duration.seconds(15));
-        transition5.setPath(circle5);
-        transition5.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition5 = getPathTransition(circle5, oldJobNode, Duration.seconds(15));
         transition5.play();
 
-        Circle circle6 = new Circle(2);
-        circle6.setLayoutY(bounds.getHeight()/ 2);
-        circle6.setLayoutX(bounds.getWidth()/ 2);
-
-        PathTransition transition6 = new PathTransition();
-        transition6.setNode(cvNode);
-        transition6.setDuration(Duration.seconds(15));
-        transition6.setPath(circle6);
-        transition6.setCycleCount(PathTransition.INDEFINITE);
+        PathTransition transition6 = getPathTransition(circle6, cvNode, Duration.seconds(1000));
         transition6.play();
+
+        PathTransition transition7 = getPathTransition(circle7, new Group(mainCloseButton), Duration.seconds(10000));
+        transition7.play();
     }
 
-    private Circle getCircle(Rectangle2D bounds, int value) {
-        Circle circle1 = new Circle((int)(110 * SCALE_DELTA));
+    private PathTransition getPathTransition(Circle circle, Group downloadNode, Duration seconds) {
+        PathTransition transition = new PathTransition();
+        transition.setNode(downloadNode);
+        transition.setDuration(seconds);
+        transition.setPath(circle);
+        transition.setCycleCount(PathTransition.INDEFINITE);
+        return transition;
+    }
+
+    private Circle getCircle(Rectangle2D bounds, int value, double radius) {
+        Circle circle1 = new Circle((int)(radius * SCALE_DELTA));
         circle1.setRotate(value);
         circle1.setLayoutY(bounds.getHeight()/ 2);
         circle1.setLayoutX(bounds.getWidth()/ 2);
