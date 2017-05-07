@@ -1,0 +1,7 @@
+   Dmitriy Lyashenko
+location: Kiev, Ukraine
+phone:    093-704-26-74, 095-812-57-80
+e-mail:   dmitriy.lyashenko.java@gmail.com
+skype:    dmitriy.lyashenko.java
+linkedin: http://bit.ly/2n9rOWv
+git-hub:  https://github.com/Solykk
