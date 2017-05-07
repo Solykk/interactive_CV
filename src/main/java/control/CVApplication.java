@@ -34,6 +34,7 @@ import javafx.util.Duration;
 import view.WOJDMWindow;
 
 import java.io.*;
+import java.math.BigDecimal;
 
 /**
  * Created by Solyk on 28.04.2017.
@@ -314,7 +315,15 @@ public class CVApplication extends Application implements Scalable {
                     stageForCV.setY(event12.getScreenY() - yOffsetCVWin);
                 });
 
-                Scene scene = new Scene(cvWindow, 536, 724);
+                if (SCALE_DELTA != 1){
+                    cvWindow.setLayoutX(getLayoutXCVWindowDelta(SCALE_DELTA));
+                    cvWindow.setLayoutY(getLayoutYCVWindowDelta(SCALE_DELTA));
+                }
+
+                System.out.println(getLayoutXCVWindowDelta(0.88));
+                System.out.println(getLayoutXCVWindowDelta(1.88));
+
+                Scene scene = new Scene(cvWindow, 536 * SCALE_DELTA, 724 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
 
@@ -359,7 +368,12 @@ public class CVApplication extends Application implements Scalable {
                     stageForWhy.setY(event12.getScreenY() - yOffsetWhyWin);
                 });
 
-                Scene scene = new Scene(whyWindow, 420, 370);
+                if (SCALE_DELTA != 1){
+                    whyWindow.setLayoutX(getLayoutXMOJWCWindowDelta(SCALE_DELTA));
+                    whyWindow.setLayoutY(getLayoutYMOJWCWindowDelta(SCALE_DELTA));
+                }
+
+                Scene scene = new Scene(whyWindow, 420 * SCALE_DELTA, 370 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
                 stageForWhy.setTitle("Why");
@@ -405,7 +419,12 @@ public class CVApplication extends Application implements Scalable {
                     stageForMore.setY(event12.getScreenY() - yOffsetMoreWin);
                 });
 
-                Scene scene = new Scene(moreWindow, 420, 370);
+                if (SCALE_DELTA != 1){
+                    moreWindow.setLayoutX(getLayoutXMOJWCWindowDelta(SCALE_DELTA));
+                    moreWindow.setLayoutY(getLayoutYMOJWCWindowDelta(SCALE_DELTA));
+                }
+
+                Scene scene = new Scene(moreWindow, 420 * SCALE_DELTA, 370 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
                 stageForMore.setTitle("More");
@@ -451,7 +470,12 @@ public class CVApplication extends Application implements Scalable {
                     stageForOldJob.setY(event12.getScreenY() - yOffsetOldJobWin);
                 });
 
-                Scene scene = new Scene(oldJobWindow, 420, 370);
+                if (SCALE_DELTA != 1){
+                    oldJobWindow.setLayoutX(getLayoutXMOJWCWindowDelta(SCALE_DELTA));
+                    oldJobWindow.setLayoutY(getLayoutYMOJWCWindowDelta(SCALE_DELTA));
+                }
+
+                Scene scene = new Scene(oldJobWindow, 420 * SCALE_DELTA, 370 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
                 stageForOldJob.setTitle("OldJob");
@@ -499,7 +523,12 @@ public class CVApplication extends Application implements Scalable {
                     stageForChat.setY(event12.getScreenY() - yOffsetChatWin);
                 });
 
-                Scene scene = new Scene(chatWindow, 420, 370);
+                if (SCALE_DELTA != 1){
+                    chatWindow.setLayoutX(getLayoutXMOJWCWindowDelta(SCALE_DELTA));
+                    chatWindow.setLayoutY(getLayoutYMOJWCWindowDelta(SCALE_DELTA));
+                }
+
+                Scene scene = new Scene(chatWindow, 420 * SCALE_DELTA, 370 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
                 stageForChat.setTitle("Chat");
