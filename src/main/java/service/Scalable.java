@@ -8,7 +8,7 @@ import java.math.BigDecimal;
  * Created by Solyk on 07.05.2017.
  */
 public interface Scalable {
-    double HEIGHT_APPLICATION_BUILD = 738;
+    double HEIGHT_APPLICATION_BUILD = 768;
     double WIDTH_APPLICATION_BUILD = 1366;
 
     default double getScaleDelta(Rectangle2D bounds){

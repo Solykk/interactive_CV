@@ -4,6 +4,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
+
 import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
@@ -13,14 +14,19 @@ import javafx.scene.layout.Pane;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Screen;
+
 import model.ENLanguage;
 import model.Language;
 import model.RULanguage;
+
 import service.Scalable;
 import service.ViewProperties;
+
 import view.CVWindow;
 import view.ChatWindow;
+import view.WOJDMWindow;
 import view.MainWindowNodes;
+
 import javafx.animation.PathTransition;
 import javafx.animation.ScaleTransition;
 import javafx.application.Application;
@@ -32,7 +38,6 @@ import javafx.scene.shape.Circle;
 import javafx.stage.Stage;
 import javafx.stage.StageStyle;
 import javafx.util.Duration;
-import view.WOJDMWindow;
 
 import java.io.*;
 
@@ -46,7 +51,6 @@ public class CVApplication extends Application implements Scalable {
     private final ViewProperties PROPERTIES = new ViewProperties();
 
     private Stage stageForWhy;
-
     private Stage stageForCV;
     private Stage stageForMore;
     private Stage stageForChat;
@@ -75,14 +79,10 @@ public class CVApplication extends Application implements Scalable {
     private boolean isChatWindowOn;
     private boolean isOldJobWindowOn;
 
-    private final int FONT_SIZE_20 = 20;
-    private final int FORTH_CHILDREN_OF_GROUP = 4;
-    private final int SIXTH_CHILDREN_OF_GROUP = 6;
     private final int SEVENTH_CHILDREN_OF_GROUP = 7;
     private final int EIGHTH_CHILDREN_OF_GROUP = 8;
     private final int NINTH_CHILDREN_OF_GROUP = 9;
     private final int TENTH_CHILDREN_OF_GROUP = 10;
-    private final int ELEVENTH_CHILDREN_OF_GROUP = 11;
 
     private double xOffsetCVWin;
     private double yOffsetCVWin;
@@ -134,7 +134,7 @@ public class CVApplication extends Application implements Scalable {
 
         Pane pane = getPaneForMainWindow(groupPa);
 
-        Scene scene = new Scene(pane, 1366 * SCALE_DELTA, 738 * SCALE_DELTA);
+        Scene scene = new Scene(pane, 1366 * SCALE_DELTA, 768 * SCALE_DELTA);
         scene.setFill(Color.TRANSPARENT);
         stage.setTitle("Main");
         stage.getIcons().add(new Image("Master-Joda.png"));
@@ -158,7 +158,7 @@ public class CVApplication extends Application implements Scalable {
 
     private ImageView getCloseButton(Stage stage) {
         ImageView closeButton = new  ImageView(new Image("CloseButton.png"));
-        closeButton.setOpacity(0.25);
+        closeButton.setOpacity(0.35);
 
         closeButton.setOnMouseClicked(event -> {
             if (stageForCV != null){
@@ -199,8 +199,6 @@ public class CVApplication extends Application implements Scalable {
     private void initMet() {
         language = new ENLanguage();
 
-        System.out.println(SCALE_DELTA);
-        System.out.println(BOUNDS.getWidth() + " " + BOUNDS.getHeight());
         isCVWindowOn = false;
         isWhyWindowOn = false;
         isMoreWindowOn = false;
@@ -223,7 +221,7 @@ public class CVApplication extends Application implements Scalable {
         Circle languageNodeCircle = getCircle(bounds, 240, 110);
         Circle moreNodeCircle = getCircle(bounds, 300, 110);
         Circle oldJobNodeCircle = getCircle(bounds, 360, 110);
-        Circle cvNodeCircle = getCircle(bounds, 0, 1);
+        Circle cvNodeCircle = getCircle(bounds, 60, 2);
         Circle mainCloseButtonCircle = getCircle(bounds, -45, 210);
 
         PathTransition downloadNodeTransition = getPathTransition(downloadNodeCircle, downloadNode, Duration.seconds(15));
@@ -244,7 +242,7 @@ public class CVApplication extends Application implements Scalable {
         PathTransition oldJobNodeTransition = getPathTransition(oldJobNodeCircle, oldJobNode, Duration.seconds(15));
         oldJobNodeTransition.play();
 
-        PathTransition cvNodeTransition = getPathTransition(cvNodeCircle, cvNode, Duration.seconds(1000));
+        PathTransition cvNodeTransition = getPathTransition(cvNodeCircle, cvNode, Duration.seconds(10000));
         cvNodeTransition.play();
 
         PathTransition mainCloseButtonTransition = getPathTransition(mainCloseButtonCircle, mainCloseButton, Duration.seconds(10000));
@@ -299,9 +297,6 @@ public class CVApplication extends Application implements Scalable {
                     cvWindow.setLayoutY(getLayoutYCVWindowDelta(SCALE_DELTA));
                 }
 
-                System.out.println(getLayoutXCVWindowDelta(0.88));
-                System.out.println(getLayoutXCVWindowDelta(1.88));
-
                 Scene scene = new Scene(cvWindow, 536 * SCALE_DELTA, 724 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
@@ -328,8 +323,8 @@ public class CVApplication extends Application implements Scalable {
                 whyWindow = new WOJDMWindow(language.getWhyWinHead(),
                                             language.getWhyWinHeadUnder(),
                                             language.getWhyWinBody(),
-                        PROPERTIES,
-                        SCALE_DELTA).createGroup();
+                                            PROPERTIES,
+                                            SCALE_DELTA).createGroup();
 
                 whyWindow.getChildren().get(11).setOnMouseClicked(event13 -> {
                     stageForWhy.close();
@@ -359,8 +354,8 @@ public class CVApplication extends Application implements Scalable {
                 stageForWhy.getIcons().add(new Image("R2-D2.png"));
                 stageForWhy.setScene(scene);
 
-                stageForWhy.setX(BOUNDS.getWidth()/2 - 150);
-                stageForWhy.setY(BOUNDS.getHeight()/2 - 25);
+                stageForWhy.setX(BOUNDS.getWidth()/2 - (150 * SCALE_DELTA));
+                stageForWhy.setY(BOUNDS.getHeight()/2 - (25 * SCALE_DELTA));
 
                 stageForWhy.show();
                 isWhyWindowOn = true;
@@ -410,8 +405,8 @@ public class CVApplication extends Application implements Scalable {
                 stageForMore.getIcons().add(new Image("Darth.png"));
                 stageForMore.setScene(scene);
 
-                stageForMore.setX(BOUNDS.getWidth()/2 - 150);
-                stageForMore.setY(BOUNDS.getHeight()/2 + - 380);
+                stageForMore.setX(BOUNDS.getWidth()/2 - (150 * SCALE_DELTA));
+                stageForMore.setY(BOUNDS.getHeight()/2 - (380 * SCALE_DELTA));
 
                 stageForMore.show();
                 isMoreWindowOn = true;
@@ -460,8 +455,8 @@ public class CVApplication extends Application implements Scalable {
                 stageForOldJob.setTitle("OldJob");
                 stageForOldJob.getIcons().add(new Image("Grievous.png"));
 
-                stageForOldJob.setX(BOUNDS.getWidth()/1.24 - 150);
-                stageForOldJob.setY(BOUNDS.getHeight()/2 + - 380);
+                stageForOldJob.setX(BOUNDS.getWidth()/1.24 - (150 * SCALE_DELTA));
+                stageForOldJob.setY(BOUNDS.getHeight()/2 - (380 * SCALE_DELTA));
 
                 stageForOldJob.setScene(scene);
                 stageForOldJob.show();
@@ -535,8 +530,8 @@ public class CVApplication extends Application implements Scalable {
                 stageForChat.getIcons().add(new Image("C-3PO.png"));
                 stageForChat.setScene(scene);
 
-                stageForChat.setX(BOUNDS.getWidth()/1.24 - 150);
-                stageForChat.setY(BOUNDS.getHeight()/2 + - 25);
+                stageForChat.setX(BOUNDS.getWidth()/1.24 - (150 * SCALE_DELTA));
+                stageForChat.setY(BOUNDS.getHeight()/2 - (25 * SCALE_DELTA));
 
                 stageForChat.show();
                 isChatWindowOn = true;
@@ -551,6 +546,7 @@ public class CVApplication extends Application implements Scalable {
             language = new ENLanguage();
         }
 
+        int FONT_SIZE_20 = 20;
         reLangForNode(downloadNode, language.getDownloadNodeDescription(), FONT_SIZE_20);
         reLangForNode(cvNode, language.getCVNodeDescription(), FONT_SIZE_20);
         reLangForNode(whyNode, language.getWhyNodeDescription(), FONT_SIZE_20);
@@ -579,6 +575,8 @@ public class CVApplication extends Application implements Scalable {
     private void reLangForNode(Group group, String description, int fontSize) {
         Text text = PROPERTIES.getTextProperties(description, fontSize);
         TextFlow textFlow = PROPERTIES.getTextFlowForNodeWin(text);
+
+        int FORTH_CHILDREN_OF_GROUP = 4;
         group.getChildren().remove(FORTH_CHILDREN_OF_GROUP);
         group.getChildren().add(textFlow);
     }
@@ -603,6 +601,7 @@ public class CVApplication extends Application implements Scalable {
         group.getChildren().remove(TENTH_CHILDREN_OF_GROUP);
         group.getChildren().add(TENTH_CHILDREN_OF_GROUP, textLayerBody);
 
+        int ELEVENTH_CHILDREN_OF_GROUP = 11;
         group.getChildren().remove(ELEVENTH_CHILDREN_OF_GROUP);
         group.getChildren().add(ELEVENTH_CHILDREN_OF_GROUP, textLayerFooter);
     }
