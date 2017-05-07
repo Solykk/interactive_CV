@@ -16,12 +16,6 @@ import javafx.scene.text.TextFlow;
  */
 public class ViewProperties {
 
-    private double scaleData;
-
-    public ViewProperties(double scaleData) {
-        this.scaleData = scaleData;
-    }
-
     public Polyline getPolylineBoxBlur(Polyline polyline) {
         polyline.setStroke(Color.WHITE);
         polyline.setStrokeWidth(1);
@@ -69,117 +63,117 @@ public class ViewProperties {
     }
 
     public TextFlow getTextFlowForNodeWin(Text text){
-        TextFlow textLayer = new TextFlow(text);
-        textLayer.setLayoutX(633);
-        textLayer.setLayoutY(370);
-        textLayer.setTextAlignment(TextAlignment.CENTER);
-        textLayer.setPrefSize(100,20);
-        return textLayer;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(633);
+        result.setLayoutY(370);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(100,20);
+        return result;
     }
 
     public TextFlow getTextFlowForCVWinHead(Text text){
-        TextFlow textLayerHead = new TextFlow(text);
-        textLayerHead.setLayoutX(188);
-        textLayerHead.setLayoutY(12);
-        textLayerHead.setTextAlignment(TextAlignment.CENTER);
-        textLayerHead.setPrefSize(160,20);
-        return textLayerHead;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(188);
+        result.setLayoutY(12);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(160,20);
+        return result;
     }
 
     public TextFlow getTextFlowForCVWinHeadUnder(Text text){
-        TextFlow textLayerHeadUnder = new TextFlow(text);
-        textLayerHeadUnder.setLayoutX(28);
-        textLayerHeadUnder.setLayoutY(38);
-        textLayerHeadUnder.setTextAlignment(TextAlignment.CENTER);
-        textLayerHeadUnder.setPrefSize(480,20);
-        return textLayerHeadUnder;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(28);
+        result.setLayoutY(38);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(480,20);
+        return result;
     }
 
     public TextArea getTextFlowForCVWinBody(String text){
-        TextArea textLayerBody = new TextArea(text);
-        textLayerBody.setEditable(false);
-        textLayerBody.setWrapText(true);
-        textLayerBody.setEffect(new Glow(0.4));
-        textLayerBody.setOpacity(0.7);
-        textLayerBody.setLayoutX(35);
-        textLayerBody.setLayoutY(76);
-        textLayerBody.setPrefSize(465,440);
-        return textLayerBody ;
+        TextArea result = new TextArea(text);
+        result.setEditable(false);
+        result.setWrapText(true);
+        result.setEffect(new Glow(0.4));
+        result.setOpacity(0.7);
+        result.setLayoutX(35);
+        result.setLayoutY(76);
+        result.setPrefSize(465,440);
+        return result ;
     }
 
     public TextArea getTextFlowForCVWinFooter(String text){
-        TextArea textLayerFooter = new TextArea(text);
-        textLayerFooter.setEditable(false);
-        textLayerFooter.setWrapText(true);
-        textLayerFooter.setEffect(new Glow(0.4));
-        textLayerFooter.setOpacity(0.7);
-        textLayerFooter.setLayoutX(215);
-        textLayerFooter.setLayoutY(565);
-        textLayerFooter.setPrefSize(300,165);
-        return textLayerFooter ;
+        TextArea result = new TextArea(text);
+        result.setEditable(false);
+        result.setWrapText(true);
+        result.setEffect(new Glow(0.4));
+        result.setOpacity(0.7);
+        result.setLayoutX(215);
+        result.setLayoutY(565);
+        result.setPrefSize(300,165);
+        return result ;
     }
 
     public TextFlow getTextFlowForWhyWinHead(Text text){
-        TextFlow textLayerHead = new TextFlow(text);
-        textLayerHead.setLayoutX(138.66);
-        textLayerHead.setLayoutY(12.2);
-        textLayerHead.setTextAlignment(TextAlignment.CENTER);
-        textLayerHead.setPrefSize(140,15);
-        return textLayerHead;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(138.66);
+        result.setLayoutY(12.2);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(140,15);
+        return result;
     }
 
     public TextFlow getTextFlowForWhyWinHeadUnder(Text text){
-        TextFlow textLayerHeadUnder = new TextFlow(text);
-        textLayerHeadUnder.setLayoutX(23.66);
-        textLayerHeadUnder.setLayoutY(30.9);
-        textLayerHeadUnder.setTextAlignment(TextAlignment.CENTER);
-        textLayerHeadUnder.setPrefSize(370,18);
-        return textLayerHeadUnder;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(23.66);
+        result.setLayoutY(30.9);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(370,18);
+        return result;
     }
 
     public TextArea getTextFlowForWhyWinBody(String text){
-        TextArea textLayerBody = new TextArea(text);
-        textLayerBody.setEditable(false);
-        textLayerBody.setWrapText(true);
-        textLayerBody.setEffect(new Glow(0.4));
-        textLayerBody.setOpacity(0.7);
-        textLayerBody.setLayoutX(33);
-        textLayerBody.setLayoutY(60);
-        textLayerBody.setPrefSize(352,271);
-        return textLayerBody ;
+        TextArea result = new TextArea(text);
+        result.setEditable(false);
+        result.setWrapText(true);
+        result.setEffect(new Glow(0.4));
+        result.setOpacity(0.7);
+        result.setLayoutX(33);
+        result.setLayoutY(60);
+        result.setPrefSize(352,271);
+        return result ;
     }
 
     public TextArea getTextFlowForChatInputLayer(){
-        TextArea textLayerBody = new TextArea();
-        textLayerBody.setEditable(true);
-        textLayerBody.setWrapText(true);
-        textLayerBody.setEffect(new Glow(0.4));
-        textLayerBody.setOpacity(0.7);
-        textLayerBody.setLayoutX(122);
-        textLayerBody.setLayoutY(245);
-        textLayerBody.setPrefSize(261,81);
-        return textLayerBody ;
+        TextArea result = new TextArea();
+        result.setEditable(true);
+        result.setWrapText(true);
+        result.setEffect(new Glow(0.4));
+        result.setOpacity(0.7);
+        result.setLayoutX(122);
+        result.setLayoutY(245);
+        result.setPrefSize(261,81);
+        return result ;
     }
 
     public TextArea getTextFlowForChatOutputLayer(){
-        TextArea textLayerBody = new TextArea();
-        textLayerBody.setEditable(false);
-        textLayerBody.setWrapText(true);
-        textLayerBody.setEffect(new Glow(0.4));
-        textLayerBody.setOpacity(0.7);
-        textLayerBody.setLayoutX(33);
-        textLayerBody.setLayoutY(60);
-        textLayerBody.setPrefSize(352,171);
-        return textLayerBody ;
+        TextArea result = new TextArea();
+        result.setEditable(false);
+        result.setWrapText(true);
+        result.setEffect(new Glow(0.4));
+        result.setOpacity(0.7);
+        result.setLayoutX(33);
+        result.setLayoutY(60);
+        result.setPrefSize(352,171);
+        return result ;
     }
 
     public TextFlow getTextFlowForChatSendButton(Text text){
-        TextFlow textLayerHead = new TextFlow(text);
-        textLayerHead.setLayoutX(35);
-        textLayerHead.setLayoutY(292);
-        textLayerHead.setTextAlignment(TextAlignment.CENTER);
-        textLayerHead.setPrefSize(65,16);
-        return textLayerHead;
+        TextFlow result = new TextFlow(text);
+        result.setLayoutX(35);
+        result.setLayoutY(292);
+        result.setTextAlignment(TextAlignment.CENTER);
+        result.setPrefSize(65,16);
+        return result;
     }
 
 }

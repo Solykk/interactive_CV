@@ -4,6 +4,7 @@ import com.itextpdf.text.Document;
 import com.itextpdf.text.DocumentException;
 import com.itextpdf.text.pdf.PdfCopy;
 import com.itextpdf.text.pdf.PdfReader;
+import javafx.scene.Node;
 import javafx.scene.control.Alert;
 import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
@@ -42,7 +43,7 @@ public class CVApplication extends Application implements Scalable {
 
     private final Rectangle2D BOUNDS = Screen.getPrimary().getBounds();
     private final double SCALE_DELTA = getScaleDelta(BOUNDS);
-    private final ViewProperties PROPERTIES = new ViewProperties(SCALE_DELTA);
+    private final ViewProperties PROPERTIES = new ViewProperties();
 
     private Stage stageForWhy;
 
@@ -111,28 +112,10 @@ public class CVApplication extends Application implements Scalable {
         whyWinProperties();
 
         downloadNode = new MainWindowNodes(language.getDownloadNodeDescription(), PROPERTIES, SCALE_DELTA).createGroup();
-        scaleAndMouseEvent(downloadNode);
-        downloadNode.setOnMouseClicked(event -> {
-            try {
-                save();
-                Alert alert = new Alert(Alert.AlertType.INFORMATION);
-                alert.initStyle(StageStyle.TRANSPARENT);
-                alert.setHeaderText(null);
-                alert.setContentText(language.getSaveOk());
-                alert.showAndWait();
-
-            } catch (IOException | DocumentException e) {
-                Alert alert = new Alert(Alert.AlertType.ERROR);
-                alert.initStyle(StageStyle.TRANSPARENT);
-                alert.setHeaderText("Look, an Error Dialog");
-                alert.setContentText(language.getSaveError() + e.getMessage());
-                alert.showAndWait();
-            }
-        });
+        downloadNodeProperties();
 
         languageNode = new MainWindowNodes(language.getLanguageNodeDescription(), PROPERTIES, SCALE_DELTA).createGroup();
-        scaleAndMouseEvent(languageNode);
-        languageNode.setOnMouseClicked(event -> reLanguage());
+        languageNodeProperties();
 
         moreNode = new MainWindowNodes(language.getMoreNodeDescription(), PROPERTIES, SCALE_DELTA).createGroup();
         moreWinProperties();
@@ -149,11 +132,7 @@ public class CVApplication extends Application implements Scalable {
 
         Group groupPa = new Group(downloadNode, whyNode, chatNode, languageNode, moreNode, oldJobNode, cvNode, mainCloseButton);
 
-        Pane pane = new Pane();
-        pane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.0)");
-        pane.getChildren().add(groupPa);
-        pane.setScaleX(SCALE_DELTA);
-        pane.setScaleY(SCALE_DELTA);
+        Pane pane = getPaneForMainWindow(groupPa);
 
         Scene scene = new Scene(pane, 1366 * SCALE_DELTA, 738 * SCALE_DELTA);
         scene.setFill(Color.TRANSPARENT);
@@ -163,10 +142,22 @@ public class CVApplication extends Application implements Scalable {
         stage.show();
     }
 
+    private Pane getPaneForMainWindow(Group groupPa) {
+        Pane pane = new Pane();
+        pane.setStyle("-fx-background-color: rgba(0, 0, 0, 0.0)");
+        pane.getChildren().add(groupPa);
+        pane.setScaleX(SCALE_DELTA);
+        pane.setScaleY(SCALE_DELTA);
+        return pane;
+    }
+
+    private void languageNodeProperties() {
+        scaleAndMouseEvent(languageNode);
+        languageNode.setOnMouseClicked(event -> reLanguage());
+    }
+
     private ImageView getCloseButton(Stage stage) {
         ImageView closeButton = new  ImageView(new Image("CloseButton.png"));
-        closeButton.setLayoutX(800);
-        closeButton.setLayoutY(200);
         closeButton.setOpacity(0.25);
 
         closeButton.setOnMouseClicked(event -> {
@@ -184,6 +175,7 @@ public class CVApplication extends Application implements Scalable {
             }
             stage.close();
         });
+
         return closeButton;
     }
 
@@ -225,55 +217,55 @@ public class CVApplication extends Application implements Scalable {
 
     private void circlePathTran(Rectangle2D bounds) {
 
-        Circle circle = getCircle(bounds, 60, 110);
-        Circle circle1 = getCircle(bounds, 120, 110);
-        Circle circle2 = getCircle(bounds, 180, 110);
-        Circle circle3 = getCircle(bounds, 240, 110);
-        Circle circle4 = getCircle(bounds, 300, 110);
-        Circle circle5 = getCircle(bounds, 360, 110);
-        Circle circle6 = getCircle(bounds, 0, 1);
-        Circle circle7 = getCircle(bounds, 45, 200);
+        Circle downloadNodeCircle = getCircle(bounds, 60, 110);
+        Circle whyNodeCircle = getCircle(bounds, 120, 110);
+        Circle chatNodeCircle = getCircle(bounds, 180, 110);
+        Circle languageNodeCircle = getCircle(bounds, 240, 110);
+        Circle moreNodeCircle = getCircle(bounds, 300, 110);
+        Circle oldJobNodeCircle = getCircle(bounds, 360, 110);
+        Circle cvNodeCircle = getCircle(bounds, 0, 1);
+        Circle mainCloseButtonCircle = getCircle(bounds, -45, 210);
 
-        PathTransition transition = getPathTransition(circle, downloadNode, Duration.seconds(15));
-        transition.play();
+        PathTransition downloadNodeTransition = getPathTransition(downloadNodeCircle, downloadNode, Duration.seconds(15));
+        downloadNodeTransition.play();
 
-        PathTransition transition1 = getPathTransition(circle1, whyNode, Duration.seconds(15));
-        transition1.play();
+        PathTransition whyNodeTransition = getPathTransition(whyNodeCircle, whyNode, Duration.seconds(15));
+        whyNodeTransition.play();
 
-        PathTransition transition2 = getPathTransition(circle2, chatNode, Duration.seconds(15));
-        transition2.play();
+        PathTransition chatNodeTransition = getPathTransition(chatNodeCircle, chatNode, Duration.seconds(15));
+        chatNodeTransition.play();
 
-        PathTransition transition3 = getPathTransition(circle3, languageNode, Duration.seconds(15));
-        transition3.play();
+        PathTransition languageNodeTransition = getPathTransition(languageNodeCircle, languageNode, Duration.seconds(15));
+        languageNodeTransition.play();
 
-        PathTransition transition4 = getPathTransition(circle4, moreNode, Duration.seconds(15));
-        transition4.play();
+        PathTransition moreNodeTransition = getPathTransition(moreNodeCircle, moreNode, Duration.seconds(15));
+        moreNodeTransition.play();
 
-        PathTransition transition5 = getPathTransition(circle5, oldJobNode, Duration.seconds(15));
-        transition5.play();
+        PathTransition oldJobNodeTransition = getPathTransition(oldJobNodeCircle, oldJobNode, Duration.seconds(15));
+        oldJobNodeTransition.play();
 
-        PathTransition transition6 = getPathTransition(circle6, cvNode, Duration.seconds(1000));
-        transition6.play();
+        PathTransition cvNodeTransition = getPathTransition(cvNodeCircle, cvNode, Duration.seconds(1000));
+        cvNodeTransition.play();
 
-        PathTransition transition7 = getPathTransition(circle7, new Group(mainCloseButton), Duration.seconds(10000));
-        transition7.play();
+        PathTransition mainCloseButtonTransition = getPathTransition(mainCloseButtonCircle, mainCloseButton, Duration.seconds(10000));
+        mainCloseButtonTransition.play();
     }
 
-    private PathTransition getPathTransition(Circle circle, Group downloadNode, Duration seconds) {
-        PathTransition transition = new PathTransition();
-        transition.setNode(downloadNode);
-        transition.setDuration(seconds);
-        transition.setPath(circle);
-        transition.setCycleCount(PathTransition.INDEFINITE);
-        return transition;
+    private PathTransition getPathTransition(Circle circle, Node downloadNode, Duration seconds) {
+        PathTransition result = new PathTransition();
+        result.setNode(downloadNode);
+        result.setDuration(seconds);
+        result.setPath(circle);
+        result.setCycleCount(PathTransition.INDEFINITE);
+        return result;
     }
 
-    private Circle getCircle(Rectangle2D bounds, int value, double radius) {
-        Circle circle1 = new Circle((int)(radius * SCALE_DELTA));
-        circle1.setRotate(value);
-        circle1.setLayoutY(bounds.getHeight()/ 2);
-        circle1.setLayoutX(bounds.getWidth()/ 2);
-        return circle1;
+    private Circle getCircle(Rectangle2D bounds, int rotateValue, double radius) {
+        Circle result = new Circle((int)(radius * SCALE_DELTA));
+        result.setRotate(rotateValue);
+        result.setLayoutY(bounds.getHeight()/ 2);
+        result.setLayoutX(bounds.getWidth()/ 2);
+        return result;
     }
 
     private void cvNodeProperties() {
@@ -474,6 +466,27 @@ public class CVApplication extends Application implements Scalable {
                 stageForOldJob.setScene(scene);
                 stageForOldJob.show();
                 isOldJobWindowOn = true;
+            }
+        });
+    }
+
+    private void downloadNodeProperties() {
+        scaleAndMouseEvent(downloadNode);
+        downloadNode.setOnMouseClicked(event -> {
+            try {
+                save();
+                Alert alert = new Alert(Alert.AlertType.INFORMATION);
+                alert.initStyle(StageStyle.TRANSPARENT);
+                alert.setHeaderText(null);
+                alert.setContentText(language.getSaveOk());
+                alert.showAndWait();
+
+            } catch (IOException | DocumentException e) {
+                Alert alert = new Alert(Alert.AlertType.ERROR);
+                alert.initStyle(StageStyle.TRANSPARENT);
+                alert.setHeaderText("Look, an Error Dialog");
+                alert.setContentText(language.getSaveError() + e.getMessage());
+                alert.showAndWait();
             }
         });
     }
