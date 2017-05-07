@@ -1,20 +1,20 @@
 -----------------------------------------------------------------
-GOOD KNOWLEDGE OF
+    GOOD KNOWLEDGE OF
 -----------------------------------------------------------------
-JavaSE (Core, OOP, Collections, JDBC)
-JavaEE (Servlet, JSP, JSTL)
-DB: Oracle
-Test: JUnit
-VCS: Git
-IDE: IntellijIDEA
-OS: Windows
-Spring (IoC, MVC) 
-Hibernate
-Maven, Tomcat
-HTML, CSS
-XML, JSON
-JavaFX 
-Refactoring
+    JavaSE (Core, OOP, Collections, JDBC)
+    JavaEE (Servlet, JSP, JSTL)
+    DB: Oracle
+    Test: JUnit
+    VCS: Git
+    IDE: IntellijIDEA
+    OS: Windows
+    Spring (IoC, MVC)
+    Hibernate
+    Maven, Tomcat
+    HTML, CSS
+    XML, JSON
+    JavaFX
+    Refactoring
 -----------------------------------------------------------------
     EDUCATION
 -----------------------------------------------------------------
@@ -23,7 +23,7 @@ Refactoring
  Java Developer Courses in computer training center “It - center”
 certificate of successfully completed the course JavaSE and JavaEE
    08.2015 - 05.2016 (8 months)
-   Donetsk national technical university, Department of Economics 
+ Donetsk national technical university, Department of Economics
 and Management, Enterprise management, Diploma of a specialist. 
    09.2005 - 07.2010 (4 years 10 months)
 -----------------------------------------------------------------
