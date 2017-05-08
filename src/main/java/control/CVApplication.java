@@ -15,6 +15,7 @@ import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Screen;
 
+import model.Chat;
 import model.ENLanguage;
 import model.Language;
 import model.RULanguage;
@@ -490,6 +491,7 @@ public class CVApplication extends Application implements Scalable {
         scaleAndMouseEvent(chatNode);
 
         chatNode.setOnMouseClicked(event -> {
+
             if(!isChatWindowOn) {
                 stageForChat = new Stage();
                 stageForChat.initStyle(StageStyle.TRANSPARENT);
@@ -502,7 +504,10 @@ public class CVApplication extends Application implements Scalable {
                         PROPERTIES,
                         SCALE_DELTA).createGroup();
 
+                Chat chat =  new Chat(chatWindow);
+
                 chatWindow.getChildren().get(12).setOnMouseClicked(event13 -> {
+                    chat.disconnect(true);
                     stageForChat.close();
                     isChatWindowOn = false;
                     chatWindow = null;
@@ -535,6 +540,9 @@ public class CVApplication extends Application implements Scalable {
 
                 stageForChat.show();
                 isChatWindowOn = true;
+
+                Thread thread = new Thread(chat);
+                thread.start();
             }
         });
     }
