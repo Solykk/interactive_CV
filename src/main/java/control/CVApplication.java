@@ -77,7 +77,7 @@ public class CVApplication extends Application implements Scalable {
     private boolean isCVWindowOn;
     private boolean isWhyWindowOn;
     private boolean isMoreWindowOn;
-    private boolean isChatWindowOn;
+    public static Boolean isChatWindowOn;
     private boolean isOldJobWindowOn;
 
     private final int SEVENTH_CHILDREN_OF_GROUP = 7;
@@ -203,7 +203,7 @@ public class CVApplication extends Application implements Scalable {
         isCVWindowOn = false;
         isWhyWindowOn = false;
         isMoreWindowOn = false;
-        isChatWindowOn = false;
+        isChatWindowOn = new Boolean(false);
         isOldJobWindowOn = false;
     }
 
@@ -504,14 +504,6 @@ public class CVApplication extends Application implements Scalable {
                         PROPERTIES,
                         SCALE_DELTA).createGroup();
 
-                Chat chat =  new Chat(chatWindow);
-
-                chatWindow.getChildren().get(12).setOnMouseClicked(event13 -> {
-                    chat.disconnect(true);
-                    stageForChat.close();
-                    isChatWindowOn = false;
-                    chatWindow = null;
-                });
 
                 chatWindow.getChildren().get(11).setOnMousePressed(event1 ->{
                     xOffsetChatWin = event1.getSceneX();
@@ -541,6 +533,7 @@ public class CVApplication extends Application implements Scalable {
                 stageForChat.show();
                 isChatWindowOn = true;
 
+                Chat chat =  new Chat(chatWindow, stageForChat);
                 Thread thread = new Thread(chat);
                 thread.start();
             }

@@ -5,8 +5,9 @@ import java.nio.ByteBuffer;
 public interface ChatProperties {
 
     int BuffSize = 300;
-    String DisconnectMessage = ("\nConnection is closed. Thank you for using this chat.\n").toUpperCase();
+    String DisconnectMessage = "exit";
     int SleepTime = 250;
+    String ConnectText = "Connect";
     String Delimiter = String.valueOf((char)(19));
 
 
