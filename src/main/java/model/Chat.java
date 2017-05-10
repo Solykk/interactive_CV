@@ -16,6 +16,7 @@ import java.net.InetSocketAddress;
 
 import java.net.UnknownHostException;
 import java.nio.ByteBuffer;
+import java.nio.channels.AsynchronousCloseException;
 import java.nio.channels.ClosedChannelException;
 import java.nio.channels.ServerSocketChannel;
 import java.nio.channels.SocketChannel;
@@ -82,12 +83,6 @@ public class Chat implements ChatProperties, Runnable{
 
         myPort = 4444;
 
-//        try {
-//            myPort = create(new int[] { 4444, 4584, 4843 });
-//        } catch (IOException e) {
-//            e.printStackTrace();
-//        }
-
         chatWindow.getChildren().get(12).setOnMouseClicked(event13 -> {
             disconnect();
             CVApplication.isChatWindowOn = false;
@@ -130,19 +125,19 @@ public class Chat implements ChatProperties, Runnable{
             readChannel(makeChannel);
             return;
         }
-
-        if (clientChannel == null) {
-            clientChannel = serverSocketChannel.accept();
-            Thread.sleep(SleepTime);
-            if (clientChannel != null) {
-                sendMessage(clientChannel,  Delimiter + ("Connection with " + " successfully established on \"").toUpperCase() +
-                         "\"\n", false);
-            }
-        }
-
-        if (clientChannel != null) {
-            readChannel(clientChannel);
-        }
+//
+//        if (clientChannel == null) {
+//            clientChannel = serverSocketChannel.accept();
+//            Thread.sleep(SleepTime);
+//            if (clientChannel != null) {
+//                sendMessage(clientChannel,  Delimiter + ("Connection with " + " successfully established on \"").toUpperCase() +
+//                         "\"\n", false);
+//            }
+//        }
+//
+//        if (clientChannel != null) {
+//            readChannel(clientChannel);
+//        }
     }
 
     private int readChannel(SocketChannel ch) throws IOException {
@@ -199,13 +194,14 @@ public class Chat implements ChatProperties, Runnable{
         while (runWhileController) {
             try {
                 System.out.println("Before Process");
+                Thread.sleep(1000);
                 process();
                 System.out.println("After Process");
             } catch (Exception e) {
                 sendButton.setFill(Color.rgb(255, 40, 0));
                 setSendReceiveStat(-1);
                 makeChannel = null;
-                clientChannel = null;
+//                clientChannel = null;
                 System.out.println(e.getMessage() + " ------ " + e.toString());
             }
         }
@@ -220,11 +216,11 @@ public class Chat implements ChatProperties, Runnable{
                 System.out.println("makeChannel.close();");
                 makeChannel.close();
             }
-            if (clientChannel != null && clientChannel.isOpen()) {
-                sendMessage(clientChannel, DisconnectMessage, false);
-                System.out.println("clientChannel.close();");
-                clientChannel.close();
-            }
+//            if (clientChannel != null && clientChannel.isOpen()) {
+//                sendMessage(clientChannel, DisconnectMessage, false);
+//                System.out.println("clientChannel.close();");
+//                clientChannel.close();
+//            }
             if (serverSocketChannel != null && serverSocketChannel.isOpen()) {
                 System.out.println("serverSocketChannel.close();");
                 serverSocketChannel.close();
@@ -235,7 +231,7 @@ public class Chat implements ChatProperties, Runnable{
         }
         finally {
             makeChannel = null;
-            clientChannel = null;
+//            clientChannel = null;
             serverSocketChannel = null;
         }
     }
@@ -245,6 +241,11 @@ public class Chat implements ChatProperties, Runnable{
 
         try {
             makeChannel = SocketChannel.open(new InetSocketAddress(toIpAddress, toPort));
+            Thread.sleep(SleepTime);
+            if (makeChannel != null) {
+                sendMessage(makeChannel,  Delimiter + ("Connection with " + " successfully established on \"").toUpperCase() +
+                        "\"\n", false);
+            }
             sendButton.setFill(Color.rgb(127,255,0));
         } catch (Exception e) {
             System.out.println("ConnectFAil");
@@ -283,17 +284,5 @@ public class Chat implements ChatProperties, Runnable{
     public void setSendReceiveStat(int sendReceiveStat) {
         this.sendReceiveStat = sendReceiveStat;
     }
-//    private int create(int[] ports) throws IOException {
-    //    }
-//        throw new IOException("no free port found");
-//        }
-//            }
-//
-//            } catch (IOException ex) {
-//                return port;
-//                new ServerSocket(port);
-//            try {
-//        for (int port : ports) {
-
 
 }

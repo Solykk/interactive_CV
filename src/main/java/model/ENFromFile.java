@@ -3,6 +3,7 @@ package model;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
+import java.net.URL;
 
 /**
  * Created by Solyk on 04.05.2017.
@@ -25,7 +26,7 @@ class ENFromFile {
 
      static String getString(String url) throws IOException {
          File file = new File(url);
-         try (FileReader fis = new FileReader("src/main/resources/" + file)) {
+         try (FileReader fis = new FileReader(file)) {
              int c;
              StringBuilder stringBuilder = new StringBuilder();
              while((c = fis.read()) != -1){

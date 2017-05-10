@@ -547,7 +547,7 @@ public class CVApplication extends Application implements Scalable {
             language = new ENLanguage();
         }
 
-        int FONT_SIZE_20 = 20;
+        int FONT_SIZE_20 = 19;
         reLangForNode(downloadNode, language.getDownloadNodeDescription(), FONT_SIZE_20);
         reLangForNode(cvNode, language.getCVNodeDescription(), FONT_SIZE_20);
         reLangForNode(whyNode, language.getWhyNodeDescription(), FONT_SIZE_20);

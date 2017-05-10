@@ -39,7 +39,7 @@ public class MainWindowNodes implements Scalable {
 
         Polygon adjustmentLayer = properties.getAdjustmentLayer(new Polygon(getPolygonAdjustmentLayer()));
 
-        Text text = properties.getTextProperties(getText(), 20);
+        Text text = properties.getTextProperties(getText(), 19);
 
         TextFlow textLayer = new TextFlow(text);
         textLayer.setLayoutX(633);
