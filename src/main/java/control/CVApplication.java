@@ -533,9 +533,7 @@ public class CVApplication extends Application implements Scalable {
                 stageForChat.show();
                 isChatWindowOn = true;
 
-                Chat chat =  new Chat(chatWindow, stageForChat);
-                Thread thread = new Thread(chat);
-                thread.start();
+                new Thread(new Chat(chatWindow, stageForChat)).start();
             }
         });
     }
