@@ -7,10 +7,13 @@ import javafx.scene.control.TextArea;
 import javafx.scene.input.KeyCode;
 import javafx.scene.input.KeyEvent;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
 import javafx.scene.paint.Color;
 import javafx.scene.shape.Polygon;
 import javafx.stage.Stage;
 
+import java.io.File;
 import java.io.IOException;
 
 import java.net.InetAddress;
@@ -76,7 +79,6 @@ public class Chat implements ChatProperties, Runnable{
         try {
             InetAddress ip = InetAddress.getLocalHost();
             myIpAddress = ip.getHostAddress();
-            System.out.println(myIpAddress);
         } catch (UnknownHostException e) {
             e.printStackTrace();
         }
@@ -261,7 +263,6 @@ public class Chat implements ChatProperties, Runnable{
             }
 
             sendButton.setFill(Color.rgb(127,255,0));
-            System.out.println(makeChannel.toString());
 
         } catch (Exception e) {
             throw new InterruptedException();
@@ -279,13 +280,28 @@ public class Chat implements ChatProperties, Runnable{
             while ((readBytesNum = ch.read(buffInput)) > 0) {
                 String receivedMessage = buffToString(buffInput, readBytesNum);
 
-                System.out.println(receivedMessage.toUpperCase());
-
                 if (receivedMessage.equals(DisconnectMessage)){
+                    try {
+                        new MediaPlayer(new Media(new File("src/main/resources/outro.mp3").toURI().toString())).play();
+                    } catch (Exception e){
+
+                    }
                     disconnect();
                 } else {
+                    if (receivedMessage.equals("ONLINE\n")){
+                        try {
+                            new MediaPlayer(new Media(new File("src/main/resources/message.mp3").toURI().toString())).play();
+                        } catch (Exception e){
+
+                        }
+                    }
                     if (!receivedMessage.equals(DisconnectMessage)) {
                         output.setStyle("-fx-text-fill: chartreuse");
+                        try {
+                            new MediaPlayer(new Media(new File("src/main/resources/message.mp3").toURI().toString())).play();
+                        } catch (Exception e){
+
+                        }
                         output.appendText("\n" + (sendReceiveStat != 0 ? "\tDMITRIY_LYASHENKO:\n" : "") + receivedMessage);
                         setSendReceiveStat(0);
                     } else {

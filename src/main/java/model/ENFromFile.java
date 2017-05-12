@@ -25,7 +25,7 @@ class ENFromFile {
 
      static String getString(String url) throws IOException {
          File file = new File(url);
-         try (FileReader fis = new FileReader(file)) {
+         try (FileReader fis = new FileReader("src/main/resources/" + file)) {
              int c;
              StringBuilder stringBuilder = new StringBuilder();
              while((c = fis.read()) != -1){
