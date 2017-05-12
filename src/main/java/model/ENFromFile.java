@@ -3,7 +3,6 @@ package model;
 import java.io.File;
 import java.io.FileReader;
 import java.io.IOException;
-import java.net.URL;
 
 /**
  * Created by Solyk on 04.05.2017.
