@@ -1,11 +1,10 @@
 package view;
 
 import javafx.scene.Group;
-import javafx.scene.image.Image;
-import javafx.scene.image.ImageView;
 import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 import javafx.scene.text.*;
+
 import service.Scalable;
 import service.ViewProperties;
 
@@ -112,9 +111,5 @@ public class MainWindowNodes implements Scalable {
 
     public String getText() {
         return text;
-    }
-
-    public void setText(String text) {
-        this.text = text;
     }
 }

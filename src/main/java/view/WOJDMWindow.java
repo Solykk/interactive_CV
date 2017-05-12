@@ -9,6 +9,7 @@ import javafx.scene.shape.Polygon;
 import javafx.scene.shape.Polyline;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
+
 import service.Scalable;
 import service.ViewProperties;
 
