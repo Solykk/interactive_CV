@@ -41,7 +41,7 @@ public class Main extends CVApplication{
         StringBuilder stringBuilder = new StringBuilder();
         try {
             InputStream is = Main.class.getResourceAsStream(fileName);
-            InputStreamReader isr = new InputStreamReader(is);
+            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
             BufferedReader br = new BufferedReader(isr);
             int c;
             while ((c = br.read()) != -1) {
