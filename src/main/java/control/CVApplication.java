@@ -66,6 +66,7 @@ public class CVApplication extends Application implements Scalable {
     private Group chatNode;
     private Group moreNode;
     private Group oldJobNode;
+
     private ImageView mainCloseButton;
 
     private Group cvWindow;
@@ -203,7 +204,7 @@ public class CVApplication extends Application implements Scalable {
         isCVWindowOn = false;
         isWhyWindowOn = false;
         isMoreWindowOn = false;
-        isChatWindowOn = new Boolean(false);
+        isChatWindowOn = Boolean.FALSE;
         isOldJobWindowOn = false;
     }
 
@@ -531,7 +532,7 @@ public class CVApplication extends Application implements Scalable {
                 stageForChat.setY(BOUNDS.getHeight()/2 - (25 * SCALE_DELTA));
 
                 stageForChat.show();
-                isChatWindowOn = true;
+                isChatWindowOn = Boolean.TRUE;
 
                 new Thread(new Chat(chatWindow, stageForChat)).start();
             }
@@ -545,14 +546,14 @@ public class CVApplication extends Application implements Scalable {
             language = new ENLanguage();
         }
 
-        int FONT_SIZE_20 = 19;
-        reLangForNode(downloadNode, language.getDownloadNodeDescription(), FONT_SIZE_20);
-        reLangForNode(cvNode, language.getCVNodeDescription(), FONT_SIZE_20);
-        reLangForNode(whyNode, language.getWhyNodeDescription(), FONT_SIZE_20);
-        reLangForNode(moreNode, language.getMoreNodeDescription(), FONT_SIZE_20);
-        reLangForNode(oldJobNode, language.getOldJobNodeDescription(), FONT_SIZE_20);
-        reLangForNode(languageNode, language.getLanguageNodeDescription(), FONT_SIZE_20);
-        reLangForNode(chatNode, language.getChatNodeDescription(), FONT_SIZE_20);
+        int FONT_SIZE_19 = 19;
+        reLangForNode(downloadNode, language.getDownloadNodeDescription(), FONT_SIZE_19);
+        reLangForNode(cvNode, language.getCVNodeDescription(), FONT_SIZE_19);
+        reLangForNode(whyNode, language.getWhyNodeDescription(), FONT_SIZE_19);
+        reLangForNode(moreNode, language.getMoreNodeDescription(), FONT_SIZE_19);
+        reLangForNode(oldJobNode, language.getOldJobNodeDescription(), FONT_SIZE_19);
+        reLangForNode(languageNode, language.getLanguageNodeDescription(), FONT_SIZE_19);
+        reLangForNode(chatNode, language.getChatNodeDescription(), FONT_SIZE_19);
 
         if(isCVWindowOn) {
             reLangForCVWin(cvWindow, language);

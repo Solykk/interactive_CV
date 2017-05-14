@@ -1,13 +1,11 @@
 package model;
 
-import java.io.File;
-import java.io.FileReader;
-import java.io.IOException;
+import java.io.*;
 
 /**
  * Created by Solyk on 04.05.2017.
  */
-class ENFromFile {
+public class ENFromFile {
 
     static String cv = getTextFromFile("CV_EN.txt");
     static String cvInfo = getTextFromFile("CVInfo_EN.txt");
@@ -23,15 +21,14 @@ class ENFromFile {
         }
     }
 
-     static String getString(String url) throws IOException {
-         File file = new File(url);
-         try (FileReader fis = new FileReader("src/main/resources/" + file)) {
-             int c;
-             StringBuilder stringBuilder = new StringBuilder();
-             while((c = fis.read()) != -1){
-                 stringBuilder.append((char) c);
-             }
-             return stringBuilder.toString();
+    static String getString(String url) throws IOException {
+    try (FileReader fis = new FileReader(url)) {
+            int c;
+            StringBuilder stringBuilder = new StringBuilder();
+            while((c = fis.read()) != -1){
+                stringBuilder.append((char) c);
+            }
+            return stringBuilder.toString();
         }
     }
 }

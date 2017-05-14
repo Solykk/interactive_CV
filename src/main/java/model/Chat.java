@@ -81,7 +81,7 @@ public class Chat implements ChatProperties, Runnable{
 
         chatWindow.getChildren().get(12).setOnMouseClicked(event13 -> {
             disconnect();
-            CVApplication.isChatWindowOn = false;
+            CVApplication.isChatWindowOn = Boolean.FALSE;
             chatWindow = null;
             stageForChat.close();
             runWhileController = false;
@@ -147,11 +147,7 @@ public class Chat implements ChatProperties, Runnable{
             @Override
             public void run() {
                 for (int i = 3333; i < 3338; i++) {
-                    try {
-                        Thread.sleep(SleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(SleepTime);
                     try {
                         if(threadChannel != null || !findConnectionWhileController || !CVApplication.isChatWindowOn){
                             break;
@@ -171,11 +167,7 @@ public class Chat implements ChatProperties, Runnable{
             @Override
             public void run() {
                 for (int i = 3333; i < 3338; i++) {
-                    try {
-                        Thread.sleep(SleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(SleepTime);
                     try {
                         if(threadChannel != null || !findConnectionWhileController || !CVApplication.isChatWindowOn){
                             break;
@@ -195,11 +187,7 @@ public class Chat implements ChatProperties, Runnable{
             @Override
             public void run() {
                 for (int i = 3333; i < 3338; i++) {
-                    try {
-                        Thread.sleep(SleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(SleepTime);
                     try {
                         if(threadChannel != null || !findConnectionWhileController || !CVApplication.isChatWindowOn){
                             break;
@@ -219,11 +207,7 @@ public class Chat implements ChatProperties, Runnable{
             @Override
             public void run() {
                 for (int i = 3333; i < 3338; i++) {
-                    try {
-                        Thread.sleep(SleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(SleepTime);
                     try {
                         if(threadChannel != null || !findConnectionWhileController || !CVApplication.isChatWindowOn){
                             break;
@@ -243,11 +227,7 @@ public class Chat implements ChatProperties, Runnable{
             @Override
             public void run() {
                 for (int i = 3333; i < 3338; i++) {
-                    try {
-                        Thread.sleep(SleepTime);
-                    } catch (InterruptedException e) {
-                        e.printStackTrace();
-                    }
+                    threadSleep(SleepTime);
                     try {
                         if(threadChannel != null || !findConnectionWhileController || !CVApplication.isChatWindowOn){
                             break;
@@ -264,11 +244,7 @@ public class Chat implements ChatProperties, Runnable{
         };
         t4.start();
 
-        try {
-            Thread.sleep(1000);
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-        }
+        threadSleep(1000);
 
         return threadChannel;
     }
@@ -280,7 +256,7 @@ public class Chat implements ChatProperties, Runnable{
             }
 
             makeChannel = getValidConnection();
-            Thread.sleep(SleepTime);
+            threadSleep(SleepTime);
 
             if (makeChannel != null) {
                 sendMessage(makeChannel,  "ONLINE".toUpperCase() + "\n", false);
@@ -347,7 +323,7 @@ public class Chat implements ChatProperties, Runnable{
         boundListener();
         while (runWhileController) {
             try {
-                Thread.sleep(SleepTime);
+                threadSleep(SleepTime);
                 process();
             } catch (Exception e) {
                 sendButton.setFill(Color.rgb(255, 40, 0));
@@ -414,10 +390,17 @@ public class Chat implements ChatProperties, Runnable{
         }
     }
 
+    public void threadSleep(int time) {
+        try {
+            Thread.sleep(time);
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+        }
+    }
+
     public void setSendReceiveStat(int sendReceiveStat) {
         this.sendReceiveStat = sendReceiveStat;
     }
-
 
     public SocketChannel getThreadChannel() {
         return threadChannel;
