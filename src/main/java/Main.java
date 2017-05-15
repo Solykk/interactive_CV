@@ -1,4 +1,5 @@
 import control.CVApplication;
+
 import model.ENFromFile;
 import model.RUFromFile;
 
@@ -6,11 +7,6 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.InputStreamReader;
-import java.net.URISyntaxException;
-import java.net.URL;
-import java.nio.file.Files;
-import java.nio.file.Path;
-import java.nio.file.Paths;
 
 /**
  * Created by Solyk on 28.04.2017.
