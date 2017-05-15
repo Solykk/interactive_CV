@@ -39,10 +39,10 @@ public class Main extends CVApplication{
 
     private static String getStringBuilder(String fileName) {
         StringBuilder stringBuilder = new StringBuilder();
-        try {
-            InputStream is = Main.class.getResourceAsStream(fileName);
-            InputStreamReader isr = new InputStreamReader(is, "UTF-8");
-            BufferedReader br = new BufferedReader(isr);
+        try (InputStream is = Main.class.getResourceAsStream(fileName);
+             InputStreamReader isr = new InputStreamReader(is, "UTF-8");
+             BufferedReader br = new BufferedReader(isr))
+        {
             int c;
             while ((c = br.read()) != -1) {
                 stringBuilder.append((char) c);

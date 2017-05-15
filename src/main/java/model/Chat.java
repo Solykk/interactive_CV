@@ -280,27 +280,10 @@ public class Chat implements ChatProperties, Runnable{
                 String receivedMessage = buffToString(buffInput, readBytesNum);
 
                 if (receivedMessage.equals(DisconnectMessage)){
-//                    try {
-//                        new MediaPlayer(new Media(new File("src/main/resources/outro.mp3").toURI().toString())).play();
-//                    } catch (Exception e){
-//
-//                    }
                     disconnect();
                 } else {
-//                    if (receivedMessage.equals("ONLINE\n")){
-//                        try {
-//                            new MediaPlayer(new Media(new File("src/main/resources/message.mp3").toURI().toString())).play();
-//                        } catch (Exception e){
-//
-//                        }
-//                    }
                     if (!receivedMessage.equals(DisconnectMessage)) {
                         output.setStyle("-fx-text-fill: chartreuse");
-//                        try {
-//                            new MediaPlayer(new Media(new File("src/main/resources/message.mp3").toURI().toString())).play();
-//                        } catch (Exception e){
-//
-//                        }
                         output.appendText("\n" + (sendReceiveStat != 0 ? "\tDMITRIY_LYASHENKO:\n" : "") + receivedMessage);
                         setSendReceiveStat(0);
                     } else {
