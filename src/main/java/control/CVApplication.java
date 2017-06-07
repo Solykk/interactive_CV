@@ -11,6 +11,9 @@ import javafx.scene.control.TextArea;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
 import javafx.scene.layout.Pane;
+import javafx.scene.media.Media;
+import javafx.scene.media.MediaPlayer;
+import javafx.scene.media.MediaView;
 import javafx.scene.text.Text;
 import javafx.scene.text.TextFlow;
 import javafx.stage.Screen;
@@ -349,6 +352,16 @@ public class CVApplication extends Application implements Scalable {
                     whyWindow.setLayoutY(getLayoutYMOJWCWindowDelta(SCALE_DELTA));
                 }
 
+                MediaPlayer player = new MediaPlayer( new Media(getClass().getResource("KreslaLUX(854x480)ForAndroid.mp4").toExternalForm()));
+                MediaView mediaView = new MediaView(player);
+                mediaView.setOpacity(0.5);
+                mediaView.setScaleX(0.4);
+                mediaView.setScaleY(0.4);
+                mediaView.setTranslateX(-218);
+                mediaView.setTranslateY(-45);
+
+                whyWindow.getChildren().add(mediaView);
+
                 Scene scene = new Scene(whyWindow, 420 * SCALE_DELTA, 370 * SCALE_DELTA);
                 scene.setFill(Color.TRANSPARENT);
                 scene.getStylesheets().add("styles.css");
@@ -361,6 +374,7 @@ public class CVApplication extends Application implements Scalable {
 
                 stageForWhy.show();
                 isWhyWindowOn = true;
+                player.play();
             }
         });
     }
